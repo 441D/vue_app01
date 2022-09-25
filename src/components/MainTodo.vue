@@ -26,7 +26,7 @@ const deleteTodo = (id) => {
   del(id);
 };
 
-const cheageCheck = (id) => {
+const changeCheck = (id) => {
   check(id);
 };
 </script>
@@ -39,7 +39,9 @@ const cheageCheck = (id) => {
   </div>
   <div class="box-list">
     <div class="todo-list" v-for="todo in todoListRef" :key="todo.id">
-      <div class="todo"><input type="checkbox" class="check" /><label>{{ todo.task }}</label></div>
+      <div class="todo" :class="{ fin: todo.checked }">
+        <input type="checkbox" class="check" @change="changeCheck(todo.id)" :checked="todo.checked" /><label>{{ todo.task }}</label>
+      </div>
       <div class="btns">
         <button class="btn green" @click="showTodo(todo.id)">編</button>
         <button class="btn pink" @click="deleteTodo(todo.id)">削</button>
@@ -100,5 +102,11 @@ const cheageCheck = (id) => {
 }
 .pink {
   background-color: #ff4081;
+}
+
+.fin {
+  text-decoration: line-through;
+  background-color: #ddd;
+  color: #777;
 }
 </style>
