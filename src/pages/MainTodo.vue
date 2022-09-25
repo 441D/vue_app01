@@ -1,10 +1,12 @@
 <script setup>
 import {ref} from 'vue';
 import { useTodoList } from '/src/composables/useTodoList.js';
+import BaseButton from '../components/BaseButton.vue';
+import ButtonAdd from '../components/ButtonAdd.vue';
 
 const todoRef = ref('');
 const isEditRef = ref(false);
-const { todoListRef, add, show, edit, del, check } = useTodoList();
+const { todoListRef, add, show, edit, del, check, countFin } = useTodoList();
 
 const addTodo = () => {
   add(todoRef.value);
@@ -34,8 +36,8 @@ const changeCheck = (id) => {
 <template>
   <div class="box-input">
     <input type="text" class="todo-input" placeholder="+ TODOを入力" v-model="todoRef" />
-    <button class="btn green" @click="editTodo" v-if="isEditRef">変更</button>
-    <button class="btn" @click="addTodo" v-else>追加</button>
+    <BaseButton @on-click="editTodo" v-if="isEditRef">変更</BaseButton>
+    <ButtonAdd @on-click="addTodo" v-else>追加</ButtonAdd>
   </div>
   <div class="box-list">
     <div class="todo-list" v-for="todo in todoListRef" :key="todo.id">
@@ -43,10 +45,14 @@ const changeCheck = (id) => {
         <input type="checkbox" class="check" @change="changeCheck(todo.id)" :checked="todo.checked" /><label>{{ todo.task }}</label>
       </div>
       <div class="btns">
-        <button class="btn green" @click="showTodo(todo.id)">編</button>
-        <button class="btn pink" @click="deleteTodo(todo.id)">削</button>
+        <BaseButton color="blue" @on-click="showTodo(todo.id)">編</BaseButton>
+        <BaseButton color="red" @on-click="deleteTodo(todo.id)">削</BaseButton>
       </div>
     </div>
+  </div>
+  <div class="finCount">
+    <span>完了 : {{ countFin }} 、</span>
+    <span>未完了 : {{ todoListRef.length - countFin }}</span>
   </div>
 </template>
 
@@ -54,7 +60,6 @@ const changeCheck = (id) => {
 .box-input {
   margin-top: 20px;
 }
-
 .todo-input {
   width: 300px;
   margin-right: 8px;
@@ -97,16 +102,19 @@ const changeCheck = (id) => {
   display: flex;
   gap: 4px;
 }
-.green {
+.blue {
   background: #00A7E1;
 }
-.pink {
+.red {
   background: #EF6461;
 }
-
 .fin {
   text-decoration: line-through;
   background-color: #fff;
   color: #333;
+}
+.finCount {
+  margin-top: 8px;
+  font-size: 0.8em;
 }
 </style>
