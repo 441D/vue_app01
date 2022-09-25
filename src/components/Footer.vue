@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <small>&copy;441-todo</small>
+    <small>&copy;441 -TODO App-</small>
   </footer>
 </template>
 
