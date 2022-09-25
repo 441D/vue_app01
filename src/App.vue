@@ -1,11 +1,22 @@
 <script setup>
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const goBlog = () => {
+  router.push('/blog');
+};
 </script>
 
 <template>
   <div class="wrap">
     <Header />
+    <nav>
+      <router-link to="/">Home</router-link>
+      | <router-link to="/about">About</router-link>
+      | <span @click="goBlog">Blog</span>
+    </nav>
     <main class="main"><router-view /></main>
     <Footer />
   </div>
@@ -15,7 +26,6 @@ import Footer from './components/Footer.vue';
   @import 'assets/css/destyle.css';
 
   body {
-    /* background: -webkit-linear-gradient(left, #00dbde, #fc00ff); */
     background-color: #333;
     color: #fff;
   }
