@@ -1,30 +1,48 @@
 <script setup>
 import {ref} from 'vue';
+import { useTodoList } from '/src/composables/useTodoList.js';
+
 const todoRef = ref('');
-const todoListRef = ref([]);
-const ls = localStorage.todoList;
-todoListRef.value = ls ? JSON.parse(ls) : [];
+const isEditRef = ref(false);
+const { todoListRef, add, show, edit, del, check } = useTodoList();
 
 const addTodo = () => {
-  const id = new Date().getTime();
-  todoListRef.value.push({id: id, task: todoRef.value});
-  localStorage.todoList = JSON.stringify(todoListRef.value);
+  add(todoRef.value);
   todoRef.value = '';
 };
 
+const showTodo = (id) => {
+  todoRef.value = show(id);
+  isEditRef.value = true;
+};
+
+const editTodo = () => {
+  edit(todoRef.value);
+  isEditRef.value = false;
+  todoRef.value = '';
+};
+
+const deleteTodo = (id) => {
+  del(id);
+};
+
+const cheageCheck = (id) => {
+  check(id);
+};
 </script>
 
 <template>
   <div class="box-input">
     <input type="text" class="todo-input" placeholder="+ TODOを入力" v-model="todoRef" />
-    <button class="btn" @click="addTodo">追加</button>
+    <button class="btn green" @click="editTodo" v-if="isEditRef">変更</button>
+    <button class="btn" @click="addTodo" v-else>追加</button>
   </div>
   <div class="box-list">
     <div class="todo-list" v-for="todo in todoListRef" :key="todo.id">
       <div class="todo"><input type="checkbox" class="check" /><label>{{ todo.task }}</label></div>
       <div class="btns">
-        <button class="btn green">編</button>
-        <button class="btn pink">削</button>
+        <button class="btn green" @click="showTodo(todo.id)">編</button>
+        <button class="btn pink" @click="deleteTodo(todo.id)">削</button>
       </div>
     </div>
   </div>
