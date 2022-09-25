@@ -15,6 +15,11 @@ import MainTodo from './components/MainTodo.vue';
 <style>
   @import 'assets/css/destyle.css';
 
+  body {
+    /* background: -webkit-linear-gradient(left, #00dbde, #fc00ff); */
+    background-color: #333;
+    color: #fff;
+  }
   .wrap {
     display: flex;
     flex-direction: column;

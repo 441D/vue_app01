@@ -60,12 +60,12 @@ const changeCheck = (id) => {
   margin-right: 8px;
   padding: 8px;
   font-size: 18px;
-  border: 1px solid #aaa;
+  border: 1px solid #fff;
   border-radius: 6px;
 }
 .btn {
   padding: 8px;
-  background-color: #03a9f4;
+  background-image: linear-gradient(-20deg, #616161 0%, #9bc5c3 100%);
   border-radius: 6px;
   color: #fff;
   text-align: center;
@@ -83,7 +83,7 @@ const changeCheck = (id) => {
   gap: 8px;
 }
 .todo {
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
   border-radius: 6px;
   padding: 12px;
   width: 300px;
@@ -98,15 +98,15 @@ const changeCheck = (id) => {
   gap: 4px;
 }
 .green {
-  background-color: #00c853;
+  background: #00A7E1;
 }
 .pink {
-  background-color: #ff4081;
+  background: #EF6461;
 }
 
 .fin {
   text-decoration: line-through;
-  background-color: #ddd;
-  color: #777;
+  background-color: #fff;
+  color: #333;
 }
 </style>
